@@ -1,0 +1,26 @@
+{
+  "private": true,
+  "scripts": {
+    "dev": "nodemon src/index.ts",
+    "build": "tsc",
+    "start": "node build/index.js"
+  },
+  "dependencies": {
+    "@prisma/client": "^3.15.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "helmet": "^5.1.0",
+    "http-errors": "^2.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^17.0.42",
+    "@typescript-eslint/eslint-plugin": "^5.28.0",
+    "@typescript-eslint/parser": "^5.28.0",
+    "eslint": "^8.17.0",
+    "nodemon": "^2.0.16",
+    "prisma": "^3.15.1",
+    "ts-node": "^10.8.1",
+    "typescript": "^4.7.3"
+  }
+}

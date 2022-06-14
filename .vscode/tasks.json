@@ -1,0 +1,50 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "type": "npm",
+      "script": "build",
+      "path": "server",
+      "group": "build",
+      "problemMatcher": [],
+      "label": "building for production express server",
+      "detail": "tsc"
+    },
+    {
+      "type": "npm",
+      "script": "dev",
+      "path": "server",
+      "group": "none",
+      "problemMatcher": [],
+      "label": "start express dev server",
+      "detail": "nodemon src/index.ts"
+    },
+    {
+      "type": "npm",
+      "script": "start",
+      "path": "server",
+      "group": "none",
+      "problemMatcher": [],
+      "label": "start express server",
+      "detail": "node dist/index.js"
+    },
+    {
+      "type": "npm",
+      "script": "dev",
+      "path": "client",
+      "group": "none",
+      "problemMatcher": [],
+      "label": "start dev frontend server",
+      "detail": "yarn dev"
+    },
+    {
+      "type": "npm",
+      "script": "build",
+      "path": "client",
+      "group": "build",
+      "problemMatcher": [],
+      "label": "building for production",
+      "detail": "yarn build"
+    }
+  ]
+}
