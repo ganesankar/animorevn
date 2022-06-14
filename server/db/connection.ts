@@ -1,21 +1,21 @@
 import mongoose from 'mongoose';
 
-const connect = mongoose.createConnection(process.env.DB_URL!);
+const connectDB = (url: string) => {
+  const connection = mongoose.createConnection(url);
 
-connect.on('connected', () => {
-  console.log('Mongoose:: Connected DB');
-});
+  connection.on('connected', () => {
+    console.log('Mongoose - Connected DB');
+  });
 
-connect.on('disconnected', () => {
-  console.log('Mongoose:: Disconnected');
-});
+  connection.on('disconnected', () => {
+    console.log('Mongoose - Disconnected');
+  });
 
-connect.on('error', (error) => {
-  console.log('Mongoose:: Error::', JSON.stringify(error));
-});
+  connection.on('error', (error) => {
+    console.log('Mongoose - Error:', JSON.stringify(error));
+  });
 
-// Disconnect DB when close server
-process.on('SIGINT', async () => {
-  await connect.close();
-  process.exit();
-});
+  return connection;
+};
+
+export default connectDB;
