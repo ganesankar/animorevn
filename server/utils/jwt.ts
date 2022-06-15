@@ -4,9 +4,8 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-export const signAccessToken = (id: string, role: string) => {
+export const signAccessToken = (payload: { id: string; role: string }) => {
   return new Promise((resolve, reject) => {
-    const payload = { id, role };
     const options: SignOptions = {
       expiresIn: '2h',
     };
@@ -17,9 +16,8 @@ export const signAccessToken = (id: string, role: string) => {
   });
 };
 
-export const signRefreshToken = (id: string, role: string) => {
+export const signRefreshToken = (payload: { id: string; role: string }) => {
   return new Promise((resolve, reject) => {
-    const payload = { id, role };
     const options: SignOptions = {
       expiresIn: '1y',
     };

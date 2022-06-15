@@ -11,8 +11,6 @@ import error404Handler from './middlewares/error404Handler';
 
 import rootRoute from './routes';
 
-import db from './db/connection';
-
 dotenv.config();
 
 const app = express();
@@ -38,7 +36,6 @@ app.listen(PORT, () => {
 
   // Handle when shutdown server
   process.on('SIGINT', async () => {
-    await db.close();
     console.log('Server shutdown');
     process.exit();
   });
