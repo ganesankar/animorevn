@@ -6,3 +6,4 @@ export default interface User {
 }
 
 export type RegisterUser = Omit<User, 'role'>;
+export type LoginUser = Omit<User, 'role' | 'avatarURL'>;

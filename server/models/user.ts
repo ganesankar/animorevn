@@ -1,9 +1,14 @@
-import type { User } from '../types';
+import type User from '../types/user';
+import type { Document } from 'mongoose';
 import { Schema } from 'mongoose';
 import db from '../db/connection';
 import bcrypt from 'bcrypt';
 
-const UserSchema = new Schema<User>({
+interface UserDocument extends User, Document {
+  isValidPassword: (password: string) => Promise<boolean>;
+}
+
+const UserSchema = new Schema<UserDocument>({
   username: {
     type: String,
     unique: true,
@@ -33,4 +38,10 @@ UserSchema.pre('save', async function (next) {
   next();
 });
 
-export default db.model<User>('User', UserSchema);
+// Check is valid password method
+UserSchema.methods.isValidPassword = async function (password: string): Promise<boolean> {
+  const user = this as UserDocument;
+  return bcrypt.compare(password, user.password).catch(() => false);
+};
+
+export default db.model<UserDocument>('User', UserSchema);
