@@ -1,25 +1,23 @@
-import mongoose from 'mongoose';
+import type { User } from '../types';
+import { Schema } from 'mongoose';
+import db from '../db/connection';
+import bcrypt from 'bcrypt';
 
-export interface User {
-  username: string;
-  password: string;
-  avatarURL?: string | null;
-  role: 'user' | 'admin';
-}
-
-const userSchema = new mongoose.Schema<User>({
+const UserSchema = new Schema<User>({
   username: {
     type: String,
     unique: true,
+    minlength: 3,
+    maxlength: 10,
     required: true,
   },
   password: {
     type: String,
+    minlength: 3,
     required: true,
   },
   avatarURL: {
     type: String,
-    required: true,
   },
   role: {
     type: String,
@@ -27,4 +25,12 @@ const userSchema = new mongoose.Schema<User>({
   },
 });
 
-export default mongoose.model<User>('user', userSchema);
+// Hash password before save
+UserSchema.pre('save', async function (next) {
+  const salt = await bcrypt.genSalt(10);
+  const hashedPassword = await bcrypt.hash(this.password, salt);
+  this.password = hashedPassword;
+  next();
+});
+
+export default db.model<User>('User', UserSchema);
