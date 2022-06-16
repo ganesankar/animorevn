@@ -1,9 +1,6 @@
 import type { RequestHandler } from 'express';
 import httpErrors from 'http-errors';
 import jwt from 'jsonwebtoken';
-import dotenv from 'dotenv';
-
-dotenv.config();
 
 const verifyToken: RequestHandler = (req, res, next) => {
   const authHeader = req.headers.authorization;

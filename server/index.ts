@@ -1,5 +1,5 @@
 import express from 'express';
-import dotenv from 'dotenv';
+import 'dotenv/config';
 
 import cors from 'cors';
 import helmet from 'helmet';
@@ -11,7 +11,8 @@ import error404Handler from './middlewares/error404Handler';
 
 import rootRoute from './routes';
 
-dotenv.config();
+import prisma from './db/prisma';
+import redis from './db/redis';
 
 const app = express();
 const PORT = process.env.PORT || 8000;
@@ -36,6 +37,9 @@ app.listen(PORT, () => {
 
   // Handle when shutdown server
   process.on('SIGINT', async () => {
+    await prisma.$disconnect();
+    redis.disconnect();
+
     console.log('Server shutdown');
     process.exit();
   });

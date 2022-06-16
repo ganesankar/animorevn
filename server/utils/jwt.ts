@@ -1,8 +1,5 @@
 import type { SignOptions } from 'jsonwebtoken';
 import jwt from 'jsonwebtoken';
-import dotenv from 'dotenv';
-
-dotenv.config();
 
 export const signAccessToken = (payload: { id: string; role: string }) => {
   return new Promise((resolve, reject) => {
