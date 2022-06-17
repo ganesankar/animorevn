@@ -45,6 +45,24 @@
       "problemMatcher": [],
       "label": "building for production",
       "detail": "yarn build"
+    },
+    {
+      "type": "npm",
+      "script": "dev",
+      "path": "admin",
+      "group": "none",
+      "problemMatcher": [],
+      "label": "start dev admin page server",
+      "detail": "yarn dev"
+    },
+    {
+      "type": "npm",
+      "script": "build",
+      "path": "admin",
+      "group": "build",
+      "problemMatcher": [],
+      "label": "building for production",
+      "detail": "yarn build"
     }
   ]
 }
