@@ -2,9 +2,9 @@ import type { RequestHandler } from 'express';
 import httpErrors from 'http-errors';
 import jwt from 'jsonwebtoken';
 
-const verifyToken: RequestHandler = (req, res, next) => {
+const verifyAccessToken: RequestHandler = (req, res, next) => {
   const authHeader = req.headers.authorization;
-  if (!authHeader) return next(new httpErrors.Unauthorized('Unvalid token'));
+  if (!authHeader) return next(new httpErrors.BadRequest('Require access token on header'));
 
   const token = authHeader.split(' ')[1];
 
@@ -21,4 +21,4 @@ const verifyToken: RequestHandler = (req, res, next) => {
   });
 };
 
-export default verifyToken;
+export default verifyAccessToken;

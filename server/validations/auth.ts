@@ -1,17 +1,17 @@
 import joi from 'joi';
-import { RegisterUser, LoginUser } from '../types/user';
+import { RegisterUser, LoginUser } from '../types/auth';
 
 export const registerValidation = async (data: unknown) => {
   const registerSchema = joi.object<RegisterUser>({
     username: joi.string().min(3).max(10).required(),
     password: joi.string().min(3).required(),
-    avatarURL: joi.string().domain().optional(),
+    avatarURL: joi.string().uri().optional(),
   });
 
   return await registerSchema.validateAsync(data);
 };
 
-export const loginValidattion = async (data: unknown) => {
+export const loginValidation = async (data: unknown) => {
   const loginSchema = joi.object<LoginUser>({
     username: joi.string().min(3).max(10).required(),
     password: joi.string().min(3).required(),

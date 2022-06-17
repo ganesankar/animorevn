@@ -2,9 +2,10 @@ import type { RequestHandler } from 'express';
 import httpErrors from 'http-errors';
 import bcrypt from 'bcrypt';
 import prisma from '../db/prisma';
+import redis from '../db/redis';
 import { signAccessToken, signRefreshToken } from '../utils/jwt';
-import { RegisterUser, LoginUser } from '../types/user';
-import { loginValidattion, registerValidation } from '../validations/auth';
+import { RegisterUser, LoginUser, TokenPayload } from '../types/auth';
+import { loginValidation, registerValidation } from '../validations/auth';
 
 export const registerController: RequestHandler = async (req, res, next) => {
   try {
@@ -36,7 +37,7 @@ export const registerController: RequestHandler = async (req, res, next) => {
 
 export const loginController: RequestHandler = async (req, res, next) => {
   try {
-    await loginValidattion(req.body);
+    await loginValidation(req.body);
 
     const { username, password } = req.body as LoginUser;
     const user = await prisma.user.findFirst({ where: { username } });
@@ -45,19 +46,37 @@ export const loginController: RequestHandler = async (req, res, next) => {
     const isValidPassword = await bcrypt.compare(password, user.password);
     if (!isValidPassword) throw new httpErrors.Unauthorized('Wrong password');
 
+    const { password: userPassword, ...otherInfo } = user;
     const accessToken = await signAccessToken(user);
     const refreshToken = await signRefreshToken(user);
 
-    res.status(200).json({ ...user, accessToken, refreshToken });
+    res.status(200).json({ ...otherInfo, accessToken, refreshToken });
   } catch (error) {
     next(error);
   }
 };
 
-export const logoutController: RequestHandler = (req, res) => {
-  res.json({ message: 'Hello' });
+export const logoutController: RequestHandler = async (req, res, next) => {
+  try {
+    const { id } = req.body.payload as TokenPayload;
+
+    redis.del(id, (error) => {
+      if (error) throw new httpErrors.InternalServerError(error.message);
+      res.status(200).json({ message: 'Logout success' });
+    });
+  } catch (error) {
+    next(error);
+  }
 };
 
-export const refreshTokenController: RequestHandler = (req, res) => {
-  res.json({ message: 'Hello' });
+export const refreshTokenController: RequestHandler = async (req, res, next) => {
+  try {
+    const payload = req.body.payload as TokenPayload;
+    const accessToken = await signAccessToken(payload);
+    const refreshToken = await signRefreshToken(payload);
+
+    res.status(200).json({ accessToken, refreshToken });
+  } catch (error) {
+    next(error);
+  }
 };
