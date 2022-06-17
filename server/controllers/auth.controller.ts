@@ -3,6 +3,7 @@ import httpErrors from 'http-errors';
 import bcrypt from 'bcrypt';
 import prisma from '../db/prisma';
 import redis from '../db/redis';
+import setCookie from '../utils/cookie';
 import { signAccessToken, signRefreshToken } from '../utils/jwt';
 import { RegisterUser, LoginUser, TokenPayload } from '../types/auth';
 import { loginValidation, registerValidation } from '../validations/auth.validation';
@@ -28,7 +29,8 @@ export const registerController: RequestHandler = async (req, res, next) => {
     const accessToken = await signAccessToken(newUser);
     const refreshToken = await signRefreshToken(newUser);
 
-    res.status(200).json({ ...newUser, accessToken, refreshToken });
+    setCookie(res, 'refreshToken', refreshToken);
+    res.status(200).json({ ...newUser, accessToken });
   } catch (error) {
     next(error);
   }
@@ -49,7 +51,8 @@ export const loginController: RequestHandler = async (req, res, next) => {
     const accessToken = await signAccessToken(user);
     const refreshToken = await signRefreshToken(user);
 
-    res.status(200).json({ ...otherInfo, accessToken, refreshToken });
+    setCookie(res, 'refreshToken', refreshToken);
+    res.status(200).json({ ...otherInfo, accessToken });
   } catch (error) {
     next(error);
   }
@@ -61,6 +64,8 @@ export const logoutController: RequestHandler = async (req, res, next) => {
 
     redis.del(id, (error) => {
       if (error) throw new httpErrors.InternalServerError(error.message);
+
+      res.clearCookie('refreshToken');
       res.status(200).json({ message: 'Logout success' });
     });
   } catch (error) {
@@ -74,7 +79,8 @@ export const refreshTokenController: RequestHandler = async (req, res, next) => 
     const accessToken = await signAccessToken(payload);
     const refreshToken = await signRefreshToken(payload);
 
-    res.status(200).json({ accessToken, refreshToken });
+    setCookie(res, 'refreshToken', refreshToken);
+    res.status(200).json({ accessToken });
   } catch (error) {
     next(error);
   }

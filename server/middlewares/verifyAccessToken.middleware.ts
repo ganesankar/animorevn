@@ -4,7 +4,7 @@ import jwt from 'jsonwebtoken';
 
 const verifyAccessToken: RequestHandler = (req, res, next) => {
   const authHeader = req.headers.authorization;
-  if (!authHeader) return next(new httpErrors.BadRequest('Require access token on header'));
+  if (!authHeader) return next(new httpErrors.Unauthorized());
 
   const token = authHeader.split(' ')[1];
 

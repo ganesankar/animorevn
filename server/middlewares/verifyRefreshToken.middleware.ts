@@ -5,8 +5,8 @@ import httpErrors from 'http-errors';
 import redis from '../db/redis';
 
 const verifyRefreshToken: RequestHandler = (req, res, next) => {
-  const token = req.body.refreshToken as string | undefined;
-  if (!token) return next(new httpErrors.BadRequest('Require refresh token'));
+  const token = req.cookies.refreshToken as string | undefined;
+  if (!token) return next(new httpErrors.Unauthorized());
 
   jwt.verify(token, process.env.JWT_REFRESH_KEY!, (error, payload) => {
     if (error) {

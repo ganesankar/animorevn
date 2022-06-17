@@ -4,7 +4,7 @@ import jwt from 'jsonwebtoken';
 import httpErrors from 'http-errors';
 import redis from '../db/redis';
 
-export const signAccessToken = ({ id, role }: TokenPayload) => {
+export const signAccessToken = ({ id, role }: TokenPayload): Promise<string> => {
   return new Promise((resolve, reject) => {
     const payload = { id, role };
 
@@ -13,13 +13,14 @@ export const signAccessToken = ({ id, role }: TokenPayload) => {
     };
 
     jwt.sign(payload, process.env.JWT_ACCESS_KEY!, options, (error, token) => {
-      if (error) reject(error);
+      if (error) return reject(error);
+      if (!token) return reject('Unvaild token');
       resolve(token);
     });
   });
 };
 
-export const signRefreshToken = ({ id, role }: TokenPayload) => {
+export const signRefreshToken = ({ id, role }: TokenPayload): Promise<string> => {
   return new Promise((resolve, reject) => {
     const payload = { id, role };
 

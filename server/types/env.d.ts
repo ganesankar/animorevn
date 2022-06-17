@@ -15,5 +15,6 @@ declare namespace NodeJS {
 
     // Other
     readonly PORT: string | undefined;
+    readonly MODE: string | undefined;
   }
 }
