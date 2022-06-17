@@ -15,8 +15,8 @@ const PORT = process.env.PORT || 8000;
 // Middlewares
 app.use(cors({ origin: ['*'], methods: ['GET', 'POST', 'PUT', 'DELETE'] }));
 app.use(helmet());
-app.use(express.json({ limit: '30mb' }));
-app.use(express.urlencoded({ extended: true, limit: '30mb' }));
+app.use(express.json({ limit: '10kb' }));
+app.use(express.urlencoded({ extended: true, limit: '10kb' }));
 app.use(cookieParser());
 
 // Routers
