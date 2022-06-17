@@ -4,6 +4,6 @@
 
 #### Các framework, library  đc sử dụng:
 
-- `Express`, `Prisma` , `Redis` cho ***Backend***
+- `Express`, `Prisma` , `IORedis` cho ***Backend***
 - `React`, `Tailwindcss`, `Redux toolkit` cho ***Frontend***.
 - `React`, `React-admin` cho ***Admin page***
