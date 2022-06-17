@@ -14,7 +14,7 @@ declare namespace NodeJS {
     readonly DB_URL: string;
 
     // Other
-    readonly PORT: string | undefined;
+    readonly PORT?: string;
     readonly NODE_ENV?: 'PRODUCTION' | 'DEVELOPMENT';
   }
 }
