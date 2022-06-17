@@ -1,5 +1,9 @@
 # AnimoreVN - Theo dõi anime mọi lúc, mọi nơi
 
-- Được viết hoàn toàn bằng `Typescript`
-- Sử dụng `Express`, `Prisma` , `Redis` cho ***Backend***
-- Sử dụng `React`, `Tailwindcss`, `Redux toolkit` cho ***Frontend***.
+Đây là dự án được viết hoàn toàn bằng `Typescript`, cho phép bạn lưu trữ các bộ **anime, manga, lightnovel** mà mình đã, đang hoặc sẽ xem.
+
+#### Các framework, library  đc sử dụng:
+
+- `Express`, `Prisma` , `Redis` cho ***Backend***
+- `React`, `Tailwindcss`, `Redux toolkit` cho ***Frontend***.
+- `React`, `React-admin` cho ***Admin page***

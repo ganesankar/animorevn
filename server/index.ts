@@ -11,9 +11,6 @@ import error404Handler from './middlewares/error404Handler';
 
 import rootRoute from './routes';
 
-import prisma from './db/prisma';
-import redis from './db/redis';
-
 const app = express();
 const PORT = process.env.PORT || 8000;
 
@@ -36,10 +33,7 @@ app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 
   // Handle when shutdown server
-  process.on('SIGINT', async () => {
-    await prisma.$disconnect();
-    redis.disconnect();
-
+  process.on('SIGINT', () => {
     console.log('Server shutdown');
     process.exit();
   });

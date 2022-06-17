@@ -12,7 +12,6 @@ export const registerController: RequestHandler = async (req, res, next) => {
     await registerValidation(req.body);
 
     const userRequest = req.body as RegisterUser;
-
     const user = await prisma.user.findFirst({ where: { username: userRequest.username } });
     if (user) throw new httpErrors.Conflict(`${userRequest.username} is exist`);
 
