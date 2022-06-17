@@ -1,10 +1,14 @@
 import React from 'react';
+import { Routes, Route } from 'react-router-dom';
+import routes from '~/routes';
 
 const App: React.FC = () => {
   return (
-    <div className='flex h-screen items-center justify-center'>
-      <p className='text-5xl font-semibold text-red-500'>Hello World</p>
-    </div>
+    <Routes>
+      {routes.map((route, key) => (
+        <Route key={key} path={route.path} element={route.element} />
+      ))}
+    </Routes>
   );
 };
 
