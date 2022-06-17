@@ -5,7 +5,7 @@ import {
   logoutController,
   refreshTokenController,
 } from '../controllers/auth.controller';
-import verifyRefreshToken from '../middlewares/verifyRefreshToken';
+import { verifyRefreshToken } from '../middlewares';
 
 const authRoute = Router();
 

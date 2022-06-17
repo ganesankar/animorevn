@@ -6,8 +6,7 @@ import helmet from 'helmet';
 import cookieParser from 'cookie-parser';
 import morgan from 'morgan';
 
-import errorHandler from './middlewares/errorHandler';
-import error404Handler from './middlewares/error404Handler';
+import { error404Handler, errorHandler } from './middlewares';
 
 import rootRoute from './routes';
 
