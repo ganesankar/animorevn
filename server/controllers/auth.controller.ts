@@ -5,7 +5,7 @@ import prisma from '../db/prisma';
 import redis from '../db/redis';
 import { signAccessToken, signRefreshToken } from '../utils/jwt';
 import { RegisterUser, LoginUser, TokenPayload } from '../types/auth';
-import { loginValidation, registerValidation } from '../validations/auth';
+import { loginValidation, registerValidation } from '../validations/auth.validation';
 
 export const registerController: RequestHandler = async (req, res, next) => {
   try {
