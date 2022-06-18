@@ -1,0 +1,31 @@
+.title-size-1 {
+  @apply !text-2xl;
+}
+
+.title-size-2 {
+  @apply !text-3xl;
+}
+
+.title-size-3 {
+  @apply !text-4xl;
+}
+
+.title-size-4 {
+  @apply !text-5xl;
+}
+
+.title-size-5 {
+  @apply !text-6xl;
+}
+
+.title-size-6 {
+  @apply !text-7xl;
+}
+
+.title-white {
+  @apply text-white;
+}
+
+.title-black {
+  @apply text-gray-800;
+}

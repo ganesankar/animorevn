@@ -1,10 +1,10 @@
-import { Fragment } from 'react';
+import { ElementType, Fragment } from 'react';
 import DefaultLayout from '~/layouts/DefaultLayout';
 
 export interface Router {
   path: string;
   element: JSX.Element;
-  layout?: React.FC<React.PropsWithChildren<unknown>> | null;
+  layout?: ElementType | null;
 }
 
 interface Route {
@@ -21,7 +21,7 @@ export const createRoutes = (router: Router[]): Route[] => {
   return router.map((route) => {
     const { path, element, layout } = route;
 
-    let Layout = DefaultLayout;
+    let Layout: ElementType = DefaultLayout;
     if (layout) Layout = layout;
     else if (layout === null) Layout = Fragment;
 

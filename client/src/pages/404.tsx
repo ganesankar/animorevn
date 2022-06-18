@@ -1,6 +1,6 @@
-import React from 'react';
+import type { FC } from 'react';
 
-const NotFound: React.FC = () => {
+const NotFound: FC = () => {
   return <div>NotFound</div>;
 };
 

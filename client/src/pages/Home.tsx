@@ -1,6 +1,6 @@
-import React from 'react';
+import type { FC } from 'react';
 
-const Home: React.FC = () => {
+const Home: FC = () => {
   return <div>Hello World</div>;
 };
 
