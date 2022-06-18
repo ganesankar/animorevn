@@ -15,7 +15,7 @@ const Login: FC = () => {
 
   return (
     <Form width='27rem'>
-      <Title color='black'>Log in</Title>
+      <Title>Log in</Title>
       <Input label='Username' />
       <Input label='Password' type='password' />
       <Button fullWidth>Log in</Button>

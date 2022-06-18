@@ -17,15 +17,15 @@ const Input: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
   ref
 ) => {
   return (
-    <div className={cx('relative z-0 w-full', !errorMessage ? 'mb-6' : 'mb-2')}>
+    <div className={cx('relative z-0 w-full', errorMessage ? 'mb-2' : 'mb-6')}>
       <input
-        className={cx('peer', 'input', !error ? 'input-default' : 'input-error')}
+        className={cx('peer', 'input', error ? 'input-error' : 'input-default')}
         ref={ref}
         placeholder={`Enter ${label}...`}
         spellCheck={false}
         {...inputProps}
       />
-      <label className={cx('label', !error ? 'label-default' : 'label-error')}>{label}</label>
+      <label className={cx('label', error ? 'label-error' : 'label-default')}>{label}</label>
       <When condition={error && errorMessage}>
         <p className='mt-2 text-sm text-red-500'>{errorMessage}</p>
       </When>

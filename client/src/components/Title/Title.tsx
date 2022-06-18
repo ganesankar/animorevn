@@ -10,7 +10,7 @@ interface TitleProps {
 
 const cx = classNames.bind(classes);
 
-const Title: FC<TitleProps> = ({ size = 3, color = 'white', children }) => {
+const Title: FC<TitleProps> = ({ size = 3, color = 'black', children }) => {
   return (
     <p className={cx('text-4xl font-medium', `title-${color}`, `title-size-${size}`)}>
       {children}

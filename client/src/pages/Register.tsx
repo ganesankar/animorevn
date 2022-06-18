@@ -15,7 +15,7 @@ const Register: FC = () => {
 
   return (
     <Form width='27rem'>
-      <Title color='black'>Regsiter</Title>
+      <Title>Regsiter</Title>
       <Input label='Username' />
       <Input label='Password' type='password' />
       <Input label='Confirm password' type='password' />
