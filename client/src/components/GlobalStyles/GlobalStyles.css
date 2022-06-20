@@ -3,11 +3,11 @@
 @tailwind utilities;
 
 * {
-  @apply selection:bg-indigo-500/90 selection:text-white;
+  @apply selection:bg-blue-500/90 selection:text-white;
 }
 
 a {
-  @apply text-indigo-500 underline;
+  @apply text-blue-500 underline;
 }
 
 body {

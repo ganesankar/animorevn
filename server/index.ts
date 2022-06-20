@@ -14,7 +14,7 @@ const PORT = config.port;
 // Middlewares
 app.use(
   cors({
-    origin: ['http://localhost:3000'],
+    origin: [config.env === 'DEVELOPMENT' && 'http://localhost:3000'],
     credentials: true,
     exposedHeaders: ['Set-Cookie'],
   })

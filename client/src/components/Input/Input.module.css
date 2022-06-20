@@ -3,7 +3,7 @@
 }
 
 .input-default {
-  @apply border-gray-300 text-gray-900 hover:border-indigo-400 focus:border-indigo-600;
+  @apply border-gray-300 text-gray-900 hover:border-blue-400 focus:border-blue-600/90;
 }
 
 .input-error {
@@ -15,7 +15,7 @@
 }
 
 .label-default {
-  @apply border-gray-300 text-gray-500 peer-focus:text-indigo-600;
+  @apply border-gray-300 text-gray-500 peer-focus:text-blue-600;
 }
 
 .label-error {

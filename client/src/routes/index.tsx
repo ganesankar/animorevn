@@ -1,7 +1,7 @@
 import { createRoutes, Router } from './service';
 
 // Layouts
-import FormLayout from '~/layouts/FormLayout';
+import { FormLayout } from '~/layouts';
 
 // Pages
 import NotFound from '~/pages/404';

@@ -3,7 +3,7 @@
 }
 
 .btn-default {
-  @apply bg-gradient-to-r from-indigo-700 to-indigo-600 hover:from-indigo-700/95 hover:to-indigo-600/95 focus:outline-1 focus:outline-violet-400;
+  @apply bg-gradient-to-r from-blue-700 to-blue-600 hover:bg-blue-600/95 hover:from-blue-700/95 focus:outline-1 focus:outline-violet-400;
 }
 
 .btn-disabled {

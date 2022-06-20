@@ -1,18 +1,20 @@
+import type { Config, Environment } from '../types/config';
+import { get } from 'env-var';
 import 'dotenv/config';
 
-const config = {
+const config: Config = Object.freeze({
   redis: {
-    host: process.env.REDIS_HOST,
-    port: Number(process.env.REDIS_PORT),
-    username: process.env.REDIS_USERNAME,
-    password: process.env.REDIS_PASSWORD,
+    host: get('REDIS_HOST').required().asString(),
+    port: get('REDIS_PORT').required().asPortNumber(),
+    username: get('REDIS_USERNAME').required().asString(),
+    password: get('REDIS_PASSWORD').required().asString(),
   },
   jwt: {
-    accessKey: process.env.JWT_ACCESS_KEY!,
-    refreshKey: process.env.JWT_REFRESH_KEY!,
+    accessKey: get('JWT_ACCESS_KEY').required().asString(),
+    refreshKey: get('JWT_REFRESH_KEY').required().asString(),
   },
-  port: process.env.PORT || 8000,
-  env: process.env.NODE_ENV,
-};
+  port: get('PORT').asPortNumber() || 8000,
+  env: get('ENV').example('PRODUCTION').asString() as Environment,
+});
 
 export default config;
