@@ -13,8 +13,8 @@ const config: Config = Object.freeze({
     accessKey: get('JWT_ACCESS_KEY').required().asString(),
     refreshKey: get('JWT_REFRESH_KEY').required().asString(),
   },
-  port: get('PORT').asPortNumber() || 8000,
-  env: get('ENV').example('PRODUCTION').asString() as Environment,
+  port: get('PORT').default(8000).asPortNumber(),
+  env: get('ENV').default('PRODUCTION').asString() as Environment,
 });
 
 export default config;
