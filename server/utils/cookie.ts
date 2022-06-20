@@ -1,10 +1,11 @@
 import type { Response, CookieOptions } from 'express';
+import config from './config';
 
 const setCookie = (res: Response, name: string, value: string, option?: CookieOptions) => {
   res.cookie(name, value, {
     httpOnly: true,
     sameSite: 'strict',
-    secure: process.env.NODE_ENV === 'PRODUCTION', // Set secure = true on PRODUCTION
+    secure: config.env === 'PRODUCTION', // Set secure = true on PRODUCTION
     ...option,
   });
 };

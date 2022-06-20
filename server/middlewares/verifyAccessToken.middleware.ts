@@ -1,6 +1,7 @@
 import type { RequestHandler } from 'express';
 import httpErrors from 'http-errors';
 import jwt from 'jsonwebtoken';
+import config from '../utils/config';
 
 const verifyAccessToken: RequestHandler = (req, res, next) => {
   const authHeader = req.headers.authorization;
@@ -8,7 +9,7 @@ const verifyAccessToken: RequestHandler = (req, res, next) => {
 
   const token = authHeader.split(' ')[1];
 
-  jwt.verify(token, process.env.JWT_ACCESS_KEY!, (error, payload) => {
+  jwt.verify(token, config.jwt.accessKey, (error, payload) => {
     if (error) {
       if (error.message === 'jwt expired') {
         return next(new httpErrors.Unauthorized('Token expired'));

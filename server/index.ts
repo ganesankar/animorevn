@@ -1,19 +1,18 @@
 import express from 'express';
-import 'dotenv/config';
 
 import cors from 'cors';
 import helmet from 'helmet';
 import cookieParser from 'cookie-parser';
 
 import { error404Handler, errorHandler } from './middlewares';
-
 import rootRoute from './routes';
+import config from './utils/config';
 
 const app = express();
-const PORT = process.env.PORT || 8000;
+const PORT = config.port;
 
 // Middlewares
-app.use(cors({ origin: '*', methods: ['GET', 'POST', 'PUT', 'DELETE'] }));
+app.use(cors());
 app.use(helmet());
 app.use(express.json({ limit: '10kb' }));
 app.use(express.urlencoded({ extended: true, limit: '10kb' }));

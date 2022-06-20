@@ -1,10 +1,11 @@
 import Redis from 'ioredis';
+import config from '../utils/config';
 
 const redis = new Redis({
-  host: process.env.REDIS_HOST,
-  port: Number(process.env.REDIS_PORT),
-  username: process.env.REDIS_USERNAME,
-  password: process.env.REDIS_PASSWORD,
+  host: config.redis.host,
+  port: config.redis.port,
+  username: config.redis.username,
+  password: config.redis.password,
 });
 
 redis.on('ready', () => {
