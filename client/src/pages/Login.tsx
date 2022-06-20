@@ -6,7 +6,7 @@ import type { UserLogin } from '~/types/auth';
 import { useForm } from 'react-hook-form';
 import { loginSchemaResolver } from '~/validations/auth';
 import { useAppDispatch, useAppSelector, useSetDocumentTitle } from '~/hooks';
-import api from '~/api';
+import apiService from '~/api/service';
 import { startUpdate, updateSuccess, updateFail, clearError } from '~/store/reducers/user';
 
 import { Link } from 'react-router-dom';
@@ -32,7 +32,7 @@ const Login: FC = () => {
   const handleLogin: SubmitHandler<UserLogin> = async (data) => {
     try {
       dispatch(startUpdate());
-      const res = await api.login(data);
+      const res = await apiService.login(data);
       dispatch(updateSuccess(res.data));
     } catch (error) {
       if (error instanceof AxiosError) {

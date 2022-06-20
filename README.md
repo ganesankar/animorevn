@@ -6,7 +6,7 @@
 
 Hỗ trợ trên `browser` và sau này sẽ có mặt trên `mobile` và `desktop`.
 
-#### Các framework, library  đc sử dụng:
+#### Các framework, library chính  được sử dụng:
 
 - `Express`, `Prisma` , `IORedis` cho ***Backend***
 - `React`, `Tailwindcss`, `Redux toolkit` cho ***Frontend***.
