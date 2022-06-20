@@ -5,15 +5,12 @@ import store from '~/store';
 
 import App from '~/App';
 import GlobalStyles from '~/components/GlobalStyles';
-import AuthProvider from '~/auth/provider';
 
 createRoot(document.getElementById('app-root')!).render(
   <Provider store={store}>
     <BrowserRouter>
       <GlobalStyles>
-        <AuthProvider>
-          <App />
-        </AuthProvider>
+        <App />
       </GlobalStyles>
     </BrowserRouter>
   </Provider>

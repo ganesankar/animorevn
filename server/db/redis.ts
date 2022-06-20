@@ -1,12 +1,7 @@
 import Redis from 'ioredis';
 import config from '../utils/config';
 
-const redis = new Redis({
-  host: config.redis.host,
-  port: config.redis.port,
-  username: config.redis.username,
-  password: config.redis.password,
-});
+const redis = new Redis({ ...config.redis });
 
 redis.on('ready', () => {
   console.log('Redis:: Ready');
