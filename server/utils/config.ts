@@ -2,7 +2,7 @@ import type { Config, Environment } from '../types/config';
 import { get } from 'env-var';
 import 'dotenv/config';
 
-const config: Config = Object.freeze({
+const config: Config = {
   redis: {
     host: get('REDIS_HOST').required().asString(),
     port: get('REDIS_PORT').required().asPortNumber(),
@@ -15,6 +15,6 @@ const config: Config = Object.freeze({
   },
   port: get('PORT').default(8000).asPortNumber(),
   env: get('ENV').default('PRODUCTION').asString() as Environment,
-});
+};
 
 export default config;
