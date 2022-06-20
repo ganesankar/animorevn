@@ -14,7 +14,7 @@ const verifyAccessToken: RequestHandler = (req, res, next) => {
       if (error.message === 'jwt expired') {
         return next(new httpErrors.Unauthorized('Token expired'));
       }
-      return next(new httpErrors.Unauthorized('Unvalid token'));
+      return next(new httpErrors.Unauthorized('Unvalid access token'));
     }
 
     req.body.payload = payload;

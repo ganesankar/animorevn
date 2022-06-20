@@ -7,14 +7,14 @@ import config from '../utils/config';
 
 const verifyRefreshToken: RequestHandler = (req, res, next) => {
   const token = req.cookies.refreshToken as string | undefined;
-  if (!token) return next(new httpErrors.Unauthorized());
+  if (!token) return next(new httpErrors.Unauthorized('Unvalid refresh token'));
 
   jwt.verify(token, config.jwt.refreshKey, (error, payload) => {
     if (error) {
       if (error.message === 'jwt expired') {
-        return next(new httpErrors.Unauthorized('Token expired'));
+        return next(new httpErrors.Unauthorized('Refresh token expired'));
       }
-      return next(new httpErrors.Unauthorized('Unvalid token'));
+      return next(new httpErrors.Unauthorized('Unvalid refresh token'));
     }
 
     const tokenPayload = payload as TokenPayload;
@@ -24,7 +24,7 @@ const verifyRefreshToken: RequestHandler = (req, res, next) => {
         req.body.payload = tokenPayload;
         return next();
       }
-      return next(new httpErrors.Unauthorized('Unvalid token'));
+      return next(new httpErrors.Unauthorized('Unvalid refresh token'));
     });
   });
 };
