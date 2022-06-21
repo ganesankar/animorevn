@@ -1,10 +1,13 @@
-import joi from 'joi';
-import { UserLogin } from '~/types/auth';
-import { joiResolver } from '@hookform/resolvers/joi';
+import z from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
 
-export const loginSchema = joi.object<UserLogin>({
-  username: joi.string().min(3).max(10).required(),
-  password: joi.string().min(3).required(),
+const loginSchema = z.object({
+  username: z
+    .string()
+    .min(3, 'Username length must be at least 3 characters long')
+    .max(10, 'Username length must be less than or equal to 10 characters long'),
+  password: z.string().min(3, 'Password length must be at least 3 characters long'),
 });
 
-export const loginSchemaResolver = joiResolver(loginSchema);
+export type UserLogin = z.infer<typeof loginSchema>;
+export const loginSchemaResolver = zodResolver(loginSchema);

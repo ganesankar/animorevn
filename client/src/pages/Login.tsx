@@ -1,7 +1,8 @@
 import { FC } from 'react';
 import type { SubmitHandler } from 'react-hook-form';
-import { AxiosError } from 'axios';
-import type { UserLogin } from '~/types/auth';
+import type { AxiosError } from 'axios';
+import type { FetchError } from '~/utils/types';
+import type { UserLogin } from '~/validations/auth';
 
 import { useForm } from 'react-hook-form';
 import { loginSchemaResolver } from '~/validations/auth';
@@ -35,10 +36,14 @@ const Login: FC = () => {
       const res = await apiService.login(data);
       dispatch(updateSuccess(res.data));
     } catch (error) {
-      if (error instanceof AxiosError) {
-        dispatch(updateFail(error.response?.data));
+      const err = error as AxiosError;
+      const errorResponse = err.response?.data as FetchError | undefined;
+      if (!errorResponse) {
+        return dispatch(
+          updateFail({ error: 'Failed to connect to servererver connect fail' })
+        );
       }
-      dispatch(updateFail({ error: 'Error when login' }));
+      dispatch(updateFail(errorResponse));
     }
   };
 

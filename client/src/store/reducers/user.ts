@@ -1,10 +1,13 @@
 import type { PayloadAction } from '@reduxjs/toolkit';
-import type { User } from '~/types/auth';
+import type { FetchError } from '~/utils/types';
 import { createSlice } from '@reduxjs/toolkit';
 
-interface FetchError {
-  status?: number;
-  error: string;
+interface User {
+  id: string;
+  username: string;
+  avatarURL: string;
+  role: 'user' | 'admin';
+  accessToken: string;
 }
 
 interface UserSlice {
@@ -31,10 +34,13 @@ const userSlice = createSlice({
       state.currentUser = action.payload;
       state.error = null;
     },
-    updateFail(state, action: PayloadAction<FetchError>) {
+    updateFail(state, action: PayloadAction<Partial<FetchError>>) {
       state.isFetching = false;
       state.currentUser = null;
-      state.error = action.payload;
+      state.error = {
+        status: action.payload.status ?? 500,
+        error: action.payload.error ?? 'Connect server failed',
+      };
     },
     clearError(state) {
       state.error = null;
