@@ -1,14 +1,7 @@
 import type { PayloadAction } from '@reduxjs/toolkit';
-import type { FetchError } from '~/utils/types';
+import type { User } from '~/types/auth';
+import type { FetchError } from '~/types/api';
 import { createSlice } from '@reduxjs/toolkit';
-
-interface User {
-  id: string;
-  username: string;
-  avatarURL: string;
-  role: 'user' | 'admin';
-  accessToken: string;
-}
 
 interface UserSlice {
   currentUser: User | null;

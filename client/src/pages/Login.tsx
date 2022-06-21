@@ -1,13 +1,13 @@
 import { FC } from 'react';
 import type { SubmitHandler } from 'react-hook-form';
 import type { AxiosError } from 'axios';
-import type { FetchError } from '~/utils/types';
+import type { FetchError } from '~/types/api';
 import type { UserLogin } from '~/validations/auth';
 
 import { useForm } from 'react-hook-form';
 import { loginSchemaResolver } from '~/validations/auth';
 import { useAppDispatch, useAppSelector, useSetDocumentTitle } from '~/hooks';
-import apiService from '~/api/service';
+import authApiService from '~/api/auth';
 import { startUpdate, updateSuccess, updateFail, clearError } from '~/store/reducers/user';
 
 import { Link } from 'react-router-dom';
@@ -33,15 +33,13 @@ const Login: FC = () => {
   const handleLogin: SubmitHandler<UserLogin> = async (data) => {
     try {
       dispatch(startUpdate());
-      const res = await apiService.login(data);
-      dispatch(updateSuccess(res.data));
+      const userData = await authApiService.login(data);
+      dispatch(updateSuccess(userData));
     } catch (error) {
       const err = error as AxiosError;
       const errorResponse = err.response?.data as FetchError | undefined;
       if (!errorResponse) {
-        return dispatch(
-          updateFail({ error: 'Failed to connect to servererver connect fail' })
-        );
+        return dispatch(updateFail({ error: 'Failed to connect to server' }));
       }
       dispatch(updateFail(errorResponse));
     }
